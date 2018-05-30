@@ -6,6 +6,9 @@ import RegisterContainer from './containers/RegisterContainer'
 import SplashContainer from './containers/SplashContainer'
 import DefaultContainer from './containers/DefaultContainer'
 import SearchLikeMeContainer from './containers/SearchLikeMeContainer'
+import DialogsContainer from './containers/DialogsContainer'
+import DialogContainer from './containers/DialogContainer'
+import ProfileScreen from './components/ProfileScreen'
 import configureStore from './store/configureStore'
 import {
   createSwitchNavigator,
@@ -14,6 +17,7 @@ import {
   createDrawerNavigator,
   DrawerActions } from 'react-navigation'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'//'react-native-vector-icons/FontAwesome'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const store = configureStore({})
 
@@ -34,11 +38,14 @@ const searchTabs = createBottomTabNavigator({'searchLikeMe': SearchLikeMeContain
     })
   })
 
+const ModalStack = createSwitchNavigator({'profile' : ProfileScreen, 'dialog' : DialogContainer});
+
 const AuthSwitch = createSwitchNavigator({login: LoginContainer, register: RegisterContainer})
-const AppStack = createDrawerNavigator({search: searchTabs, 'dialogs': DefaultContainer, 'settings': DefaultContainer})
+const AppStack = createDrawerNavigator({search: searchTabs, 'dialogs': DialogsContainer, 'settings': DefaultContainer})
 const DrawerStack = createStackNavigator(
   {
-    'main': AppStack
+    'main': AppStack,
+    'modals': ModalStack
   },
   {
     headerMode: 'float',
@@ -65,8 +72,10 @@ const Router = createSwitchNavigator(
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router/>
+      <Provider store={store.store}>
+        <PersistGate loading={null} persistor={store.persistor}>
+          <Router/>
+        </PersistGate>
       </Provider>
     )
   }

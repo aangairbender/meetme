@@ -1,5 +1,7 @@
 import auth from '../api/auth'
 import people from '../api/people'
+import dialogs from '../api/dialogs'
+import messages from '../api/messages'
 import * as types from '../constants/ActionTypes'
 
 export const loginAttempt = (username, password) => (dispatch) => {
@@ -78,4 +80,78 @@ export const resetPeople = (accessToken) => (dispatch) => {
 	dispatch({
 		type: types.PEOPLE_RESET
 	})
+}
+
+export const getDialogs = (accessToken) => (dispatch) => {
+	dispatch({
+		type: types.DIALOGS_GET_REQUEST
+	})
+
+	dialogs.getDialogs(accessToken,
+		(dialogs) => {
+			dispatch({
+				type: types.DIALOGS_GET_SUCCESS,
+				dialogs
+			})
+		},
+		(error) => {
+			dispatch({
+				type: types.DIALOGS_GET_FAILURE,
+				error
+			})
+		}
+	)
+}
+
+export const getMessages = (accessToken, target) => (dispatch) => {
+	dispatch({
+		type: types.MESSAGES_GET_REQUEST
+	})
+
+	messages.getMessages(accessToken,target,'False',
+		(messages) => {
+			dispatch({
+				type: types.MESSAGES_GET_SUCCESS,
+				messages
+			})
+		},
+		(error) => {
+			dispatch({
+				type: types.MESSAGES_GET_FAILURE,
+				error
+			})
+		}
+	)
+}
+
+export const refreshMessages = (accessToken, target) => (dispatch) => {
+	dispatch({
+		type: types.MESSAGES_REFRESH_REQUEST
+	})
+
+	messages.getMessages(accessToken,target,'True',
+		(messages) => {
+			dispatch({
+				type: types.MESSAGES_REFRESH_SUCCESS,
+				messages
+			})
+		},
+		(error) => {
+			dispatch({
+				type: types.MESSAGES_REFRESH_FAILURE,
+				error
+			})
+		}
+	)
+}
+
+export const sendMessage = (accessToken, target, message) => (dispatch) => {
+	console.log('send_action');
+	messages.sendMessage(accessToken,target,message,
+		() => {
+			dispatch({
+				type: types.MESSAGE_SENT
+			})
+		},
+	)
 }

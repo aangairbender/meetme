@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
 	peopleLoaded: checkIfPeopleLoadedSelector(state),
 	people: getPeopleSelector(state),
 	accessToken: getAccessTokenSelector(state)
+	
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -17,7 +17,7 @@ const initialState = {
 }
 
 export const getUsernameSelector = (state) => state.auth.username;
-export const getAccessTokenSelector = (state) => state.auth.accessToken;
+export const getAccessTokenSelector = (state) => {console.log(state); return state.auth.accessToken;}
 export const getLastErrorSelector = (state) => state.auth.lastError;
 export const isLoggedInSelector = (state) => state.auth.loggedIn;
 

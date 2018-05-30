@@ -6,20 +6,34 @@ import Conversation from './Conversation.js'
 
 class DialogScreen extends Component {
 
+
 	constructor(props) {
 		super(props);
 	}
 
 	componentDidMount() {
-		console.log(this.props);
-		this.props.getMessages(this.props.accessToken, this.props.data.username)
+		this.props.getMessages(this.props.accessToken, this.props.navigation.getParam('data', {}).user.username)
+				
+		let cnt = 0
+		this.interval = setInterval(()=>{
+			if (this.props.messagesLoaded) {
+				cnt = (cnt + 1) % 5;
+				if (this.props.needRefresh || cnt == 4)
+					this.props.refreshMessages(this.props.accessToken, this.props.navigation.getParam('data', {}).user.username)
+			}
+		}, 1000)
 	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval)
+	}
+
 
 	render() {
 
 		if (this.props.messagesLoaded) {
 			return (
-				<Conversation me={this.props.username} messages={this.props.messages} user={this.props.data} onSendMessage={this.props.onSendMessage}/>
+				<Conversation me={this.props.username} messages={this.props.messages} user={this.props.navigation.getParam('data', {}).user.username} onSendMessage={this.props.onSendMessage}/>
 			)
 		}
 		else {
@@ -38,7 +52,7 @@ class DialogScreen extends Component {
 
 DialogScreen.propTypes = {
 	accessToken: PropTypes.string,
-	username: PropTypes.string
+	username: PropTypes.string,
 	messages: PropTypes.array,
 	getMessages: PropTypes.func,
 	messagesLoaded: PropTypes.bool,

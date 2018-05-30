@@ -4,12 +4,14 @@ import PropTypes from 'prop-types'
 
 class MessageItem extends Component {
 	render() {
+		let avatar = this.props.data.sent_from.picture;
+		if (avatar != undefined && avatar[0]=='/')
+			avatar = 'https://s-n.herokuapp.com' + avatar;
 		return (
 			<View style={styles.itemView}>
-				<Image style={styles.avatarImage} source={{uri: this.props.data.picture}}/>
+				<Image style={styles.avatarImage} source={{uri: avatar}}/>
 				<View style={styles.detailsView}>
-					<Text style={styles.fullnameText}>{this.props.data.name + ' ' + this.props.data.surname}</Text>
-					<Text style={styles.ageText}>{'Age: ' + this.props.data.age}</Text>
+					<Text style={styles.lastMessageText}>{this.props.data.sent_from.name + ': ' + this.props.data.text}</Text>
 				</View>
 			</View>
 		)
@@ -28,10 +30,7 @@ const styles = StyleSheet.create({
 		width: 64,
 		height: 64
 	},
-	fullnameText: {
-		fontSize: 16
-	},
-	ageText: {
+	lastMessageText: {
 		fontSize: 14
 	}
 })
