@@ -25,7 +25,8 @@ class DialogScreen extends Component {
 	}
 
 	componentWillUnmount() {
-		clearInterval(this.interval)
+		clearInterval(this.interval);
+		this.props.resetDialogs();
 	}
 
 
@@ -33,7 +34,7 @@ class DialogScreen extends Component {
 
 		if (this.props.messagesLoaded) {
 			return (
-				<Conversation me={this.props.username} messages={this.props.messages} user={this.props.navigation.getParam('data', {}).user.username} onSendMessage={this.props.onSendMessage}/>
+				<Conversation me={this.props.username} accessToken={this.props.accessToken} messages={this.props.messages} user={this.props.navigation.getParam('data', {}).user.username} onSendMessage={this.props.onSendMessage}/>
 			)
 		}
 		else {

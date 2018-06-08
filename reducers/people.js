@@ -35,7 +35,7 @@ const peopleReducer = (state = initialState, action) => {
 				people: []
 			})
 		default:
-			return initialState;
+			return state
 	}
 }
 

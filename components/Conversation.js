@@ -11,7 +11,7 @@ class Conversation extends Component {
 		return (
 			<View style={styles.container}>
 				<MessagesViewer style={styles.messagesView} me={this.props.me} messages={this.props.messages}/>
-				<MessageSender style={styles.footer} targetUsername={this.props.user} sendMessage={this.props.onSendMessage}/>
+				<MessageSender accessToken={this.props.accessToken} style={styles.footer} targetUsername={this.props.user} sendMessage={this.props.onSendMessage}/>
 				<KeyboardSpacer/>
 			</View>
 		)

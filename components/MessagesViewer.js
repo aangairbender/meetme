@@ -10,14 +10,15 @@ class MessagesViewer extends Component {
 	}
 
 	componentWillUpdate() {
-		this.scroll.scrollToEnd()
+		if (this.scroll != null)
+			this.scroll.scrollToEnd()
 	}
 
 	render() {
 		if (this.props.messages.length > 0) {
 			return (
 				<ScrollView ref={(scroll) => {this.scroll = scroll}}>
-				{this.props.messages.map((item, i) => <MessageItem key={i} data={item}/>)}
+				{this.props.messages.map((item, i) => <MessageItem me={this.props.me} key={i} data={item}/>)}
 				</ScrollView>
 			)
 		} else {

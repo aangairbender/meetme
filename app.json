@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "sdkVersion": "27.0.0",
+    "name": "MeetMe",
+    "description": "Social network client",
+    "android": {
+    	"package": "com.yevhen.kazmin",
+    	"config": {
+    		"googleMaps": {
+    			"apiKey": "AIzaSyCsQ6weJ4vqjzIJ7vd3RDCXgEQ9t4llYu0"
+    		}
+    	}
+    }
   }
 }

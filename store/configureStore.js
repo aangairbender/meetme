@@ -11,12 +11,12 @@ const persistConfig = {
 	stateReconciler: autoMergeLevel2
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+//const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const configureStore = (initialState : Object) => {
-	let store = createStore(persistedReducer, initialState, applyMiddleware(thunkMiddleware));
-	let persistor = persistStore(store);
-	return {store:store, persistor:persistor};
+	let store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));
+	//let persistor = persistStore(store);
+	return {store:store};//, persistor:persistor};
 }
 
 export default configureStore

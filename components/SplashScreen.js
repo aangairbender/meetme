@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, TextInput, View, Button, ScrollView, StyleSheet } from 'react-native'
+import { Text, TextInput, View, Button, ScrollView, StyleSheet, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import PropTypes from 'prop-types'
 
@@ -21,8 +21,8 @@ class SplashScreen extends Component {
 
 	render() {
 		return (
-			<View>
-				<Text>SplashScreen</Text>
+			<View style={{flexDirection: 'column', justifyContent: 'center',alignItems:'center', height:'100%'}}>
+				<Image style={{width:172, height:172}} source={require('../img/logo.jpg')}/>
 			</View>
 		)
 	}

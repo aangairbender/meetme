@@ -82,6 +82,18 @@ export const resetPeople = (accessToken) => (dispatch) => {
 	})
 }
 
+export const resetDialogs = (accessToken) => (dispatch) => {
+	dispatch({
+		type: types,DIALOGS_RESET
+	})
+}
+
+export const resetMessages = (accessToken) => (dispatch) => {
+	dispatch({
+		type: types.MESSAGES_RESET
+	})
+}
+
 export const getDialogs = (accessToken) => (dispatch) => {
 	dispatch({
 		type: types.DIALOGS_GET_REQUEST
@@ -147,6 +159,10 @@ export const refreshMessages = (accessToken, target) => (dispatch) => {
 
 export const sendMessage = (accessToken, target, message) => (dispatch) => {
 	console.log('send_action');
+	dispatch({
+		type: types.ADD_MESSAGE,
+		msg: message
+	});
 	messages.sendMessage(accessToken,target,message,
 		() => {
 			dispatch({

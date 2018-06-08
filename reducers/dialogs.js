@@ -61,7 +61,7 @@ const dialogsReducer = (state = initialState, action) => {
 				dialogs: []
 			})
 		default:
-			return initialState;
+			return state
 	}
 }
 

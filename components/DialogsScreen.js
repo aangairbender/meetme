@@ -15,6 +15,10 @@ class DialogsScreen extends Component {
 		this.props.getDialogs(this.props.accessToken)
 	}
 
+	componentWillUnmount() {
+		//this.props.resetDialogs();
+	}
+
 	render() {
 
 		if (this.props.dialogsLoaded) {

@@ -22,7 +22,7 @@ class MessageSender extends Component {
 					title='Send'
 					onPress={() => {
 						console.log('send_call');
-						this.props.sendMessage(this.props.targetUsername, this.state.message);
+						this.props.sendMessage(this.props.accessToken, this.props.targetUsername, this.state.message);
 						this.setState({message:''});
 					}}/>
 			</View>

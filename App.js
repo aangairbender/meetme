@@ -8,6 +8,7 @@ import DefaultContainer from './containers/DefaultContainer'
 import SearchLikeMeContainer from './containers/SearchLikeMeContainer'
 import DialogsContainer from './containers/DialogsContainer'
 import DialogContainer from './containers/DialogContainer'
+import MapContainer from './containers/MapContainer'
 import ProfileScreen from './components/ProfileScreen'
 import configureStore from './store/configureStore'
 import {
@@ -21,7 +22,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 const store = configureStore({})
 
-const searchTabs = createBottomTabNavigator({'searchLikeMe': SearchLikeMeContainer, 'searchByDistance': DefaultContainer},
+const searchTabs = createBottomTabNavigator({'searchLikeMe': SearchLikeMeContainer, 'searchByDistance': MapContainer},
   {
     initialRouteName: 'searchLikeMe',
     navigationOptions: ({navigation}) => ({
@@ -73,9 +74,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store.store}>
-        <PersistGate loading={null} persistor={store.persistor}>
-          <Router/>
-        </PersistGate>
+        <Router/>
       </Provider>
     )
   }

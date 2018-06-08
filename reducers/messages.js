@@ -6,7 +6,8 @@ import {
 	MESSAGES_REFRESH_SUCCESS,
 	MESSAGES_REFRESH_FAILURE,
 	MESSAGES_RESET,
-	MESSAGE_SENT
+	MESSAGE_SENT,
+	ADD_MESSAGE
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -37,6 +38,16 @@ const messagesReducer = (state = initialState, action) => {
 				messages: [...state.messages, ...action.messages],
 				needRefresh: false
 			})
+		case ADD_MESSAGE:
+			let newMsg = {
+				sent_from: {
+					name: ''
+				},
+				text: action.msg
+			}
+			return Object.assign({}, state, {
+				messages: [...state.messages, ...[newMsg]]
+			})
 		case MESSAGES_REFRESH_FAILURE:
 		case MESSAGES_GET_FAILURE:
 			return Object.assign({}, state, {
@@ -55,7 +66,7 @@ const messagesReducer = (state = initialState, action) => {
 				needRefresh: true
 			})
 		default:
-			return initialState;
+			return state
 	}
 }
 
